@@ -9,7 +9,7 @@ npm i --save millify
 ### Usage
 #### `millify(@number, @decimal)`
 
-First parameter is the number, second parameter is the desired decimal places.
+First parameter is the number, second parameter is the desired decimal places (default: 1).
 
 ```
 const millify = require('millify')
