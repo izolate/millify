@@ -6,8 +6,8 @@ suffixes.set(6, 'M')
 suffixes.set(9, 'B')
 suffixes.set(12, 'T')
 
-// Figure out the appropriate scale for the number
-const scale = (num) => {
+// Figure out the appropriate unit for the number
+const units = (num) => {
   let zeroes
   for (let z of suffixes.keys()) if (num > z) zeroes = z
   return { suffix: suffixes.get(zeroes), zeroes }
@@ -27,11 +27,11 @@ module.exports = (ugly, decimal) => {
 
   ugly = validate(ugly)
 
-  const d = digits(ugly), s = scale(d)
-  const pretty = ugly/Math.pow(10, s.zeroes)
+  const d = digits(ugly), unit = units(d)
+  const pretty = ugly/Math.pow(10, unit.zeroes)
 
   decimal = (pretty % 1 === 0) ? 1 : Math.max(1, (decimal + 1)) || 2
 
   if (ugly < 1000) return ugly
-  else return `${parseFloat(pretty.toPrecision(decimal))}${s.suffix}`
+  else return `${parseFloat(pretty.toPrecision(decimal))}${unit.suffix}`
 }
