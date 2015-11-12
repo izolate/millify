@@ -4,7 +4,7 @@
   "description": "Human-readable large numbers for Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/izolate/millify/issues"
   },
-  "homepage": "https://github.com/izolate/millify#readme"
+  "homepage": "https://github.com/izolate/millify#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.3"
+  },
+  "dependencies": {}
 }
