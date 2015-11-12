@@ -1,0 +1,26 @@
+{
+  "name": "millify",
+  "version": "1.0.0",
+  "description": "Human-readable large numbers for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/izolate/millify.git"
+  },
+  "keywords": [
+    "numbers",
+    "format",
+    "human",
+    "pretty",
+    "million"
+  ],
+  "author": "izolate <yoshtalwar@gmail.com> (http://izolate.net/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/izolate/millify/issues"
+  },
+  "homepage": "https://github.com/izolate/millify#readme"
+}
