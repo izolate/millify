@@ -6,7 +6,11 @@ Human-readable large numbers for Node.js v4+
 npm i --save millify
 ```
 
-### Example
+### Usage
+#### `millify(@number, @decimal)`
+
+First parameter is the number, second parameter is the desired decimal places.
+
 ```
 const millify = require('millify')
 
@@ -17,6 +21,3 @@ millify(1250000, 3)
 // 1.25M
 ```
 
-### `millify(@number, @decimal)`
-
-First parameter is the number, second parameter is the desired decimal places.
