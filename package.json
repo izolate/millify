@@ -15,7 +15,9 @@
     "format",
     "human",
     "pretty",
-    "million"
+    "million",
+    "billion",
+    "trillion"
   ],
   "author": "izolate <yoshtalwar@gmail.com> (http://izolate.net/)",
   "license": "MIT",
@@ -24,7 +26,6 @@
   },
   "homepage": "https://github.com/izolate/millify#readme",
   "devDependencies": {
-    "chai": "^3.4.1",
     "mocha": "^2.3.3"
   },
   "dependencies": {}
