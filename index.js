@@ -30,7 +30,7 @@ module.exports = (ugly, decimal) => {
   const d = digits(ugly), s = scale(d)
   const pretty = ugly/Math.pow(10, s.zeroes)
 
-  decimal = (pretty % 1 === 0) ? 1 : (decimal + 1) || 2
+  decimal = (pretty % 1 === 0) ? 1 : Math.max(1, (decimal + 1)) || 2
 
   if (ugly < 1000) return ugly
   else return `${parseFloat(pretty.toPrecision(decimal))}${s.suffix}`
