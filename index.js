@@ -1,6 +1,5 @@
-'use strict'
-
 module.exports = (ugly, decimal) => {
+  'use strict'
 
   const suffixes = new Map()
   suffixes.set(3, 'K')
@@ -10,9 +9,8 @@ module.exports = (ugly, decimal) => {
 
   // Make sure value is a number
   ugly = (num => {
-    num = parseFloat(num)
-    if (isNaN(num)) throw new Error('Not a number')
-    else return num
+    if (typeof num !== 'number') throw new Error('Input value is not a number')
+    else return parseFloat(num)
   })(ugly)
 
   // Figure out how many digits in the integer
