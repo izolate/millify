@@ -16,6 +16,10 @@ describe('Decimal places', () => {
 
 describe('Errors', () => {
   it('Throws an error if a number is not given', () => {
-    assert.throws(function () { millify('woo') }, Error, 'Not a number')
+    assert.throws(function () { millify('woo') }, Error)
   })
+})
+
+describe('Variety', () => {
+  it('can handle negative numbers', () => assert.equal(millify(-2000), '-2K'))
 })
