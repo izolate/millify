@@ -1,9 +1,9 @@
 # millify
-Human-readable large numbers for Node.js v4+
+Convert long numbers into a human-readable format, e.g. `25000` to `'25K'`
 
 ### Installation
-```
-npm i --save millify
+```bash
+npm i millify
 ```
 
 ### Usage
@@ -11,8 +11,8 @@ npm i --save millify
 
 First parameter is the number, second parameter is the desired decimal places (default: 1).
 
-```
-const millify = require('millify')
+```js
+import millify from 'millify'
 
 millify(2500)
 // 2.5K
