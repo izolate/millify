@@ -1,12 +1,12 @@
+'use strict'
+
+const suffixes = new Map()
+suffixes.set(3, 'K')
+suffixes.set(6, 'M')
+suffixes.set(9, 'B')
+suffixes.set(12, 'T')
+
 module.exports = (ugly, decimal) => {
-  'use strict'
-
-  const suffixes = new Map()
-  suffixes.set(3, 'K')
-  suffixes.set(6, 'M')
-  suffixes.set(9, 'B')
-  suffixes.set(12, 'T')
-
   // Make sure value is a number
   ugly = (num => {
     if (typeof num !== 'number') throw new Error('Input value is not a number')
@@ -27,5 +27,5 @@ module.exports = (ugly, decimal) => {
   decimal = (pretty % 1 === 0) ? 2 : Math.max(1, (decimal + 1)) || 3
 
   if (-1000 < ugly && ugly < 1000) return ugly
-  else return `${parseFloat(pretty.toPrecision(decimal))}${units.suffix}`
+  return `${parseFloat(pretty.toPrecision(decimal))}${units.suffix}`
 }
