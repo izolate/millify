@@ -1,5 +1,3 @@
-'use strict'
-
 const suffixes = new Map()
 suffixes.set(3, 'K')
 suffixes.set(6, 'M')
