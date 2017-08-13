@@ -1,15 +1,32 @@
 # millify
-Convert long numbers into a human-readable format, e.g. `25000` to `'25K'`
+Converts long `numbers` into pretty, human-readable `strings`.
 
-### Installation
+Examples:
+
+* `45000` to `"45K"`
+* `1250000` to `"1.25M"`
+
+## Install
+
+Get it on [npm](https://www.npmjs.com/package/millify):
+
 ```bash
 npm i millify
 ```
 
-### Usage
-#### `millify(@number, @decimal)`
+## Usage
 
-First parameter is the number, second parameter is the desired decimal places (default: 1).
+### CLI
+
+```bash
+$ millify 10000
+# 10K
+```
+Requires Node `7.6` or later. See `millify --help` for options.
+
+### Programmatically
+
+**`millify(number, decimal)`**
 
 ```js
 import millify from 'millify'
@@ -20,7 +37,14 @@ millify(2500)
 millify(1250000, 3)
 // 1.25M
 
-millify(2000000000)
-// 2B
+millify(5000000000)
+// 5B
 ```
 
+### Options
+
+Name | Type | Default | Description
+--- | --- | --- | ---
+number | `number` | - | Input number
+decimal | `number` | 1 | Number of desired decimal places
+lowercase | `boolean` | false | Lowercase abbreviations
