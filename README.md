@@ -13,7 +13,6 @@ Get it on [npm](https://www.npmjs.com/package/millify):
 ```bash
 npm i millify
 ```
-
 ## Usage
 
 ### CLI
@@ -46,5 +45,5 @@ millify(5000000000)
 Name | Type | Default | Description
 --- | --- | --- | ---
 number | `number` | - | Input number
-decimal | `number` | 1 | Number of desired decimal places
+precision | `number` | 2 | Number of significant figures
 lowercase | `boolean` | false | Lowercase abbreviations

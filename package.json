@@ -2,9 +2,22 @@
   "name": "millify",
   "version": "2.0.1",
   "description": "Human-readable large numbers for Node.js",
-  "main": "index.js",
+  "main": "src/index.js",
+  "bin": {
+    "millify": "src/cli.js"
+  },
   "scripts": {
-    "test": "mocha"
+    "test": "ava",
+    "lint": "eslint --fix src",
+    "standard": "prettier-standard 'src/**/*.js'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run standard",
+      "npm run lint",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -26,7 +39,16 @@
   },
   "homepage": "https://github.com/izolate/millify#readme",
   "devDependencies": {
-    "mocha": "^2.3.3"
+    "ava": "^0.21.0",
+    "eslint": "^4.4.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.3",
+    "prettier-standard": "^6.0.0"
   },
   "dependencies": {}
 }

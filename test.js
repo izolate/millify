@@ -1,25 +1,39 @@
-const assert = require('assert')
-const millify = require('./index')
+import test from 'ava'
+import millify from './src'
 
-describe('Units', () => {
-  it('identifies hundreds', () => assert.equal(millify(100), 100))
-  it('identifies thousands', () => assert.equal(millify(1000), '1K'))
-  it('identifies millions', () => assert.equal(millify(1000000), '1M'))
-  it('identifies billions', () => assert.equal(millify(1000000000), '1B'))
-  it('identifies trillions', () => assert.equal(millify(1000000000000), '1T'))
+test('Identifies units', t => {
+  t.is(millify(100), 100)
+  t.is(millify(1000), '1K')
+  t.is(millify(1000000), '1M')
+  t.is(millify(1000000000), '1B')
+  t.is(millify(1000000000000), '1T')
 })
 
-describe('Decimal places', () => {
-  it('defaults to 1 decimal place', () => assert.equal(millify(2500), '2.5K'))
-  it('returns desired decimal place', () => assert.equal(millify(3333, 3), '3.333K'))
+test('Lowercase units', t => {
+  const options = { lowercase: true }
+  t.is(millify(1000, options), '1k')
+  t.is(millify(1000000, options), '1m')
+  t.is(millify(1000000000, options), '1b')
 })
 
-describe('Errors', () => {
-  it('Throws an error if a number is not given', () => {
-    assert.throws(function () { millify('woo') }, Error)
-  })
+test('Precision', t => {
+  const num = 12345
+  t.is(millify(num, { precision: 0 }), '10K')
+  t.is(millify(num, { precision: 1 }), '10K')
+  t.is(millify(num, { precision: 2 }), '12K')
+  t.is(millify(num, { precision: 3 }), '12.3K')
+  t.is(millify(num, { precision: 4 }), '12.35K')
+  t.is(millify(num, { precision: 5 }), '12.345K')
 })
 
-describe('Variety', () => {
-  it('can handle negative numbers', () => assert.equal(millify(-2000), '-2K'))
+test('Negative numbers', t => {
+  t.is(millify(-100), -100)
+  t.is(millify(-1000), '-1K')
+  t.is(millify(-1000000), '-1M')
+  t.is(millify(-1000000000), '-1B')
+  t.is(millify(-1000000000000), '-1T')
+})
+
+test('Errors', t => {
+  t.throws(() => millify('Throw an error'))
 })
