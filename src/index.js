@@ -4,6 +4,22 @@ suffixes.set(6, 'M')
 suffixes.set(9, 'B')
 suffixes.set(12, 'T')
 
+// Figure out the appropriate unit for the number
+const getUnits = digits => {
+  let zeroes
+
+  for (const key of suffixes.keys()) {
+    if (digits > key) {
+      zeroes = key
+    }
+  }
+
+  return {
+    suffix: suffixes.get(zeroes),
+    zeroes
+  }
+}
+
 module.exports = (input, { precision = 2, lowercase = false } = {}) => {
   // Ensure input value is a number
   if (typeof input !== 'number') {
@@ -15,21 +31,13 @@ module.exports = (input, { precision = 2, lowercase = false } = {}) => {
   // Figure out how many digits in the integer
   const digits = 1 + Math.floor(Math.log10(Math.abs(input)))
 
-  // Figure out the appropriate unit for the number
-  const { suffix, zeroes } = ((num, zeroes) => {
-    for (let z of suffixes.keys()) {
-      if (num > z) {
-        zeroes = z
-      }
-    }
+  // Get units
+  let { suffix, zeroes } = getUnits(digits)
 
-    const suffix = suffixes.get(zeroes)
-
-    return {
-      suffix: lowercase ? suffix.toLowerCase() : suffix,
-      zeroes
-    }
-  })(digits, null)
+  // Convert to lowercase if necessary
+  if (lowercase) {
+    suffix = suffix.toLowerCase()
+  }
 
   const pretty = input / Math.pow(10, zeroes)
 
