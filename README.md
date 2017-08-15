@@ -1,10 +1,13 @@
 # millify
 Converts long `numbers` into pretty, human-readable `strings`.
 
-Examples:
+Before :unamused: | After :tada:
+--- | ---
+`2000` | `"2K"`
+`42500` | `"42.5K"`
+`1250000` | `"1.25M"`
+`2700000000` | `"2.7B"`
 
-* `45000` to `"45K"`
-* `1250000` to `"1.25M"`
 
 ## Install
 
@@ -25,7 +28,7 @@ Requires Node `7.6` or later. See `millify --help` for options.
 
 ### Programmatically
 
-**`millify(number, decimal)`**
+**`millify(number, options)`**
 
 ```js
 import millify from 'millify'
@@ -33,11 +36,11 @@ import millify from 'millify'
 millify(2500)
 // 2.5K
 
-millify(1250000, 3)
-// 1.25M
-
-millify(5000000000)
-// 5B
+millify(1250000, {
+  precision: 3,
+  lowercase: true
+})
+// 1.25m
 ```
 
 ### Options
@@ -45,5 +48,5 @@ millify(5000000000)
 Name | Type | Default | Description
 --- | --- | --- | ---
 number | `number` | - | Input number
-precision | `number` | 2 | Number of significant figures
-lowercase | `boolean` | false | Lowercase abbreviations
+precision | `number` | `2` | Number of significant figures
+lowercase | `boolean` | `false` | Lowercase abbreviations
