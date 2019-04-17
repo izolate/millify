@@ -14,7 +14,7 @@ Before :unamused: | After :tada:
 Get it on [npm](https://www.npmjs.com/package/millify):
 
 ```bash
-npm i millify
+npm install millify
 ```
 ## Usage
 
@@ -24,7 +24,7 @@ npm i millify
 $ millify 10000
 # 10K
 ```
-Requires Node `7.6` or later. See `millify --help` for options.
+See `millify --help` for options.
 
 ### Programmatically
 
@@ -38,7 +38,7 @@ millify(2500)
 
 millify(1250000, {
   precision: 3,
-  lowercase: true
+  lowerCase: true
 })
 // 1.25m
 ```
@@ -47,6 +47,5 @@ millify(1250000, {
 
 Name | Type | Default | Description
 --- | --- | --- | ---
-number | `number` | - | Input number
 precision | `number` | `2` | Number of significant figures
-lowercase | `boolean` | `false` | Lowercase abbreviations
+lowerCase | `boolean` | `false` | Lowercase abbreviations

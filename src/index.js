@@ -1,52 +1,62 @@
+const roundTo = require('round-to')
+
+const ERROR_INVALID_TYPE = 'Input value is not a number'
+
 const suffixes = new Map()
 suffixes.set(3, 'K')
 suffixes.set(6, 'M')
 suffixes.set(9, 'B')
 suffixes.set(12, 'T')
 
-// Figure out the appropriate unit for the number
-const getUnits = digits => {
-  let zeroes
+const defaultOptions = {
+  precision: 2,
+  lowerCase: false,
+}
+
+// Calculate how many digits in the number.
+// e.g. 5000 = 4
+const countDigits = val => 1 + Math.floor(Math.log10(Math.abs(val)))
+
+// Calculate which suffix group the number belongs to.
+// e.g. K, M, B
+const getNumericalGroup = val => {
+  let group = null
 
   for (const key of suffixes.keys()) {
-    if (digits > key) {
-      zeroes = key
+    if (countDigits(val) > key) {
+      group = key
+    } else {
+      break
     }
   }
 
-  return {
-    suffix: suffixes.get(zeroes),
-    zeroes
-  }
+  return group
 }
 
-module.exports = (input, { precision = 2, lowercase = false } = {}) => {
+module.exports = (inputVal, options = {}) => {
+  const opts = { ...defaultOptions, ...options }
+
   // Ensure input value is a number
-  if (typeof input !== 'number') {
-    throw new Error('Input value is not a number')
+  const input = parseFloat(inputVal)
+  if (Number.isNaN(input)) {
+    throw new Error(ERROR_INVALID_TYPE)
   }
-
-  input = parseFloat(input)
-
-  // Figure out how many digits in the integer
-  const digits = 1 + Math.floor(Math.log10(Math.abs(input)))
-
-  // Get units
-  let { suffix, zeroes } = getUnits(digits)
-
-  // Convert to lowercase if necessary
-  if (lowercase) {
-    suffix = suffix.toLowerCase()
-  }
-
-  const pretty = input / Math.pow(10, zeroes)
-
-  precision = pretty % 1 === 0 ? 2 : Math.min(Math.max(1, precision), 21)
 
   // Return original number if less than 1K
   if (input > -1000 && input < 1000) {
     return input
   }
 
-  return `${parseFloat(pretty.toPrecision(precision))}${suffix}`
+  const group = getNumericalGroup(input)
+
+  // Format suffix
+  let suffix = suffixes.get(group)
+  if (suffix && opts.lowerCase) {
+    suffix = suffix.toLowerCase()
+  }
+
+  // Create a decimal value
+  const output = input / Math.pow(10, group)
+
+  return `${roundTo(output, opts.precision)}${suffix}`
 }
