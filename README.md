@@ -47,5 +47,5 @@ millify(1250000, {
 
 Name | Type | Default | Description
 --- | --- | --- | ---
-precision | `number` | `2` | Number of significant figures
-lowerCase | `boolean` | `false` | Lowercase abbreviations
+`precision` | `number` | `2` | Number of significant figures
+`lowerCase` | `boolean` | `false` | Lowercase abbreviations

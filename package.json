@@ -1,6 +1,6 @@
 {
   "name": "millify",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Human-readable large numbers for Node.js",
   "main": "src/index.js",
   "bin": {
