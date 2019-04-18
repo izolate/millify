@@ -87,13 +87,14 @@ const Millify = (value, options = {}) => {
   // Override default options with supplied ones
   const opts = { ...defaultOptions, ...options }
 
-  // Validate value and create an input value to work with
+  // Validate value for type and length
   const val = parseInput(value)
-  const isNegative = val < 1 ? true : false
-  const input = Math.abs(val)
 
   // Add a minus sign (-) prefix if it's a negative number
-  const prefix = isNegative ? '-' : ''
+  const prefix = val < 1 ? '-' : ''
+
+  // Work with a positive value only
+  const input = Math.abs(val)
 
   // No need to continue since values < 1000 don't have an abbreviation
   if (input > -1000 && input < 1000) {
