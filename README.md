@@ -41,11 +41,20 @@ millify(1250000, {
   lowerCase: true
 })
 // 1.25m
+
+millify(39500, {
+  precision: 2,  
+  decimalSeparator: ','
+  space: true,
+})
+// 3,95 K
 ```
 
 ### Options
 
 Name | Type | Default | Description
 --- | --- | --- | ---
-`precision` | `number` | `2` | Number of significant figures
-`lowerCase` | `boolean` | `false` | Lowercase abbreviations
+`precision` | `number` | `2` | Number of significant figures to use
+`decimalSeparator` | `string` | `'.'` | Desired decimal separator (e.g. decimal point or comma)
+`lowerCase` | `boolean` | `false` | Use lowercase abbreviations
+`space` | `boolean` | `false` | Add a space between number and abbreviation
