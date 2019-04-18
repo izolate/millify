@@ -74,40 +74,39 @@ const divider = function*(value, base) {
 }
 
 /**
- * Millify converts numbers to human-readable strings.
+ * Millify converts long numbers to human-readable strings.
  *
  * @param {number} value - Number to convert
  * @param {Object} options
  * @param {number} options.precision - Number of significant figures
  * @param {string} options.decimalSeparator - Type of decimal marker
  * @param {boolean} options.lowerCase - Lowercase units
+ * @param {boolean} options.space - Space between number and abbreviation
  */
 const Millify = (value, options = {}) => {
   // Override default options with supplied ones
   const opts = { ...defaultOptions, ...options }
 
   // Validate value and create an input value to work with
-  let val = parseInput(value)
+  const val = parseInput(value)
   const isNegative = val < 1 ? true : false
   const input = Math.abs(val)
 
+  // Add a minus sign (-) prefix if it's a negative number
+  const prefix = isNegative ? '-' : ''
+
   // No need to continue since values < 1000 don't have an abbreviation
   if (input > -1000 && input < 1000) {
-    return isNegative ? -input : input
+    return `${prefix}${input}`
   }
 
   // Keep dividing the input by the numerical grouping value (base)
   // until the decimal and unit suffix is deciphered
-  const div = divider(input, opts.base)
   let count, result
-
-  for (const round of div) {
+  for (const round of divider(input, opts.base)) {
     count = round.count
     result = round.result
   }
-
-  // Add a minus sign (-) prefix if it's a negative number
-  const prefix = isNegative ? '-' : ''
 
   // Calculate the numerical group suffix and apply lowercase option
   const suffix = opts.lowerCase ? units[count].toLowerCase() : units[count]

@@ -1,8 +1,12 @@
 import test from 'ava'
 import millify from './src'
 
+test('returns a string', t => {
+  t.is(millify(100), '100')
+})
+
 test('uses correct suffixes with default options', t => {
-  t.is(millify(100), 100)
+  t.is(millify(100), '100')
   t.is(millify(1000), '1K')
   t.is(millify(1000000), '1M')
   t.is(millify(1000000000), '1B')
@@ -10,7 +14,7 @@ test('uses correct suffixes with default options', t => {
 })
 
 test('handles negative numbers like positive ones', t => {
-  t.is(millify(-100), -100)
+  t.is(millify(-100), '-100')
   t.is(millify(-1000), '-1K')
   t.is(millify(-1000000), '-1M')
   t.is(millify(-1000000000), '-1B')
