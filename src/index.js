@@ -13,14 +13,7 @@ const TRILLION = 'T'
 const QUADRILLION = 'P'
 const QUINTILLION = 'E'
 
-const units = [
-  THOUSAND,
-  MILLION,
-  BILLION,
-  TRILLION,
-  QUADRILLION,
-  QUINTILLION,
-]
+const units = [THOUSAND, MILLION, BILLION, TRILLION, QUADRILLION, QUINTILLION]
 
 const defaultOptions = {
   base: DEFAULT_BASE,
@@ -104,9 +97,9 @@ const Millify = (value, options = {}) => {
   // Keep dividing the input by the numerical grouping value (base)
   // until the decimal and unit suffix is deciphered
   let count, result
-  for (const round of divider(input, opts.base)) {
-    count = round.count
-    result = round.result
+  for (const div of divider(input, opts.base)) {
+    count = div.count
+    result = div.result
   }
 
   // Calculate the numerical group suffix and apply lowercase option
