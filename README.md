@@ -28,7 +28,7 @@ See `millify --help` for options.
 
 ## Programmatic usage
 
-**`millify(number, options)`**
+###`millify(number, options)`
 
 ```js
 import millify from 'millify'
