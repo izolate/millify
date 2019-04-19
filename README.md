@@ -19,7 +19,6 @@ npm install millify
 ```
 
 ## Command line
-
 ```bash
 millify 10000
 # 10K
@@ -28,7 +27,7 @@ See `millify --help` for options.
 
 ## Programmatic usage
 
-###`millify(number, options)`
+### `millify(number, options)`
 
 ```js
 import millify from 'millify'
