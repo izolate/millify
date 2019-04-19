@@ -17,9 +17,8 @@ Get it on [npm](https://www.npmjs.com/package/millify):
 ```bash
 npm install millify
 ```
-## Usage
 
-### CLI
+## Command line
 
 ```bash
 millify 10000
@@ -27,7 +26,7 @@ millify 10000
 ```
 See `millify --help` for options.
 
-### Programmatically
+## Programmatic usage
 
 **`millify(number, options)`**
 
@@ -56,7 +55,7 @@ millify(1440000, {
 // 1.44 MB
 ```
 
-### Options
+## Options
 
 Name | Type | Default | Description
 --- | --- | --- | ---
