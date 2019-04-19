@@ -1,6 +1,6 @@
 {
   "name": "millify",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Converts long numbers to pretty, human-readable strings",
   "main": "src/index.js",
   "bin": {
