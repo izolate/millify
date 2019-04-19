@@ -125,7 +125,7 @@ const Millify = (value, options = {}) => {
   }
 
   // Avoid out of bounds error by using the last available unit
-  unit = unit > opts.units.length ? opts.units.length : unit
+  unit = unit > opts.units.length ? opts.units.length - 1 : unit
 
   // Calculate the unit suffix and apply lowercase option
   const suffix = opts.lowerCase
