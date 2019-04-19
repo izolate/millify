@@ -1,19 +1,18 @@
-const roundTo = require('round-to')
-
 const DEFAULT_BASE = 1000
 const DEFAULT_PRECISION = 2
 const DEFAULT_DECIMAL_SEPARATOR = '.'
-const ERROR_INVALID_TYPE = 'Input value is not a number'
-const ERROR_UNSAFE_NUMBER = 'Input value is either too big or too small'
 
-const THOUSAND = 'K'
-const MILLION = 'M'
-const BILLION = 'B'
-const TRILLION = 'T'
-const QUADRILLION = 'P'
-const QUINTILLION = 'E'
+const ERROR_INVALID_VALUE = 'Value must be a valid number'
+const ERROR_UNSAFE_VALUE = 'Value is either too big or too small'
+const ERROR_INFINITE_VALUE = 'Value must be a finite number'
+const ERROR_INVALID_PRECISION = 'Precision must be a non-negative integer'
 
-const units = [THOUSAND, MILLION, BILLION, TRILLION, QUADRILLION, QUINTILLION]
+const UNIT_THOUSAND = 'K'
+const UNIT_MILLION = 'M'
+const UNIT_BILLION = 'B'
+const UNIT_TRILLION = 'T'
+const UNIT_QUADRILLION = 'P'
+const UNIT_QUINTILLION = 'E'
 
 const defaultOptions = {
   base: DEFAULT_BASE,
@@ -21,20 +20,29 @@ const defaultOptions = {
   decimalSeparator: DEFAULT_DECIMAL_SEPARATOR,
   lowerCase: false,
   space: false,
+  units: [
+    '',
+    UNIT_THOUSAND,
+    UNIT_MILLION,
+    UNIT_BILLION,
+    UNIT_TRILLION,
+    UNIT_QUADRILLION,
+    UNIT_QUINTILLION,
+  ],
 }
 
 /**
- * parseInput ensures the value is a number and within accepted range.
+ * parseValue ensures the value is a number and within accepted range.
  *
  * @param {number} value
  */
-const parseInput = value => {
+const parseValue = value => {
   const val = parseFloat(value)
   if (Number.isNaN(val)) {
-    throw new Error(ERROR_INVALID_TYPE)
+    throw new Error(ERROR_INVALID_VALUE)
   }
   if (val > Number.MAX_SAFE_INTEGER || val < Number.MIN_SAFE_INTEGER) {
-    throw new RangeError(ERROR_UNSAFE_NUMBER)
+    throw new RangeError(ERROR_UNSAFE_VALUE)
   }
   return val
 }
@@ -42,7 +50,7 @@ const parseInput = value => {
 /**
  * divider is a generator that divides a value by a denominator defined
  * by the grouping base (default 1000). Each successive turn multipies
- * the base by itself, resulting in a fraction and a grouping number (count).
+ * the base by itself, resulting in a decimal and a unit (count).
  *
  * @param {number} value - Number to be divided
  * @param {number} base - Grouping base/interval
@@ -57,13 +65,30 @@ const divider = function*(value, base) {
       return
     }
 
-    yield { count, result }
+    yield { result, count: ++count }
 
     // Increase the denominator each turn
     denominator *= base
-    // Increment the counter
-    count++
   }
+}
+
+/**
+ * round up a number to specified precision
+ *
+ * @param {number} value - Number to be rounded
+ * @param {number} precision - Significant places
+ */
+const round = (value, precision) => {
+  if (!Number.isFinite(value)) {
+    throw new Error(ERROR_INFINITE_VALUE)
+  }
+  if (!Number.isInteger(precision) || precision < 0) {
+    throw new Error(ERROR_INVALID_PRECISION)
+  }
+  if (Number.isInteger(value)) {
+    return value
+  }
+  return parseFloat(value.toFixed(precision))
 }
 
 /**
@@ -75,46 +100,48 @@ const divider = function*(value, base) {
  * @param {string} options.decimalSeparator - Type of decimal marker
  * @param {boolean} options.lowerCase - Lowercase units
  * @param {boolean} options.space - Space between number and abbreviation
+ * @param {number} options.base - Numerical group
+ * @param {Array<string>} options.units - List of units
  */
 const Millify = (value, options = {}) => {
   // Override default options with supplied ones
   const opts = { ...defaultOptions, ...options }
 
   // Validate value for type and length
-  const val = parseInput(value)
+  const val = parseValue(value)
 
   // Add a minus sign (-) prefix if it's a negative number
-  const prefix = val < 1 ? '-' : ''
+  const prefix = val < 0 ? '-' : ''
 
-  // Work with a positive value only
-  const input = Math.abs(val)
-
-  // No need to continue since values < 1000 don't have an abbreviation
-  if (input > -1000 && input < 1000) {
-    return `${prefix}${input}`
-  }
+  // Work with a positive values
+  let input = Math.abs(val)
 
   // Keep dividing the input by the numerical grouping value (base)
-  // until the decimal and unit suffix is deciphered
-  let count, result
+  // until the decimal and unit is deciphered
+  let unit = 0
   for (const div of divider(input, opts.base)) {
-    count = div.count
-    result = div.result
+    input = div.result
+    unit = div.count
   }
 
-  // Calculate the numerical group suffix and apply lowercase option
-  const suffix = opts.lowerCase ? units[count].toLowerCase() : units[count]
+  // Avoid out of bounds error by using the last available unit
+  unit = unit > opts.units.length ? opts.units.length : unit
 
-  // Round result up to desired precision
-  const rounded = roundTo(result, opts.precision)
+  // Calculate the unit suffix and apply lowercase option
+  const suffix = opts.lowerCase
+    ? opts.units[unit].toLowerCase()
+    : opts.units[unit]
+
+  // Add a space between number and abbreviation
+  const space = opts.space ? ' ' : ''
+
+  // Round decimal up to desired precision
+  const rounded = round(input, opts.precision)
 
   // Replace decimal mark if desired
   const formatted = rounded
     .toString()
     .replace(DEFAULT_DECIMAL_SEPARATOR, opts.decimalSeparator)
-
-  // Add a space between number and abbreviation
-  const space = opts.space ? ' ' : ''
 
   return `${prefix}${formatted}${space}${suffix}`
 }

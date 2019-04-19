@@ -1,7 +1,7 @@
 {
   "name": "millify",
   "version": "3.0.0",
-  "description": "Human-readable large numbers for Node.js",
+  "description": "Converts long numbers to pretty, human-readable strings",
   "main": "src/index.js",
   "bin": {
     "millify": "src/cli.js"
@@ -15,13 +15,15 @@
     "url": "git+https://github.com/izolate/millify.git"
   },
   "keywords": [
+    "long",
     "numbers",
     "format",
     "human",
     "pretty",
     "million",
     "billion",
-    "trillion"
+    "trillion",
+    "millify"
   ],
   "author": "izolate <yoshtalwar@gmail.com> (http://izolate.net/)",
   "license": "MIT",
@@ -38,7 +40,5 @@
     "eslint-plugin-prettier": "^3.0.1",
     "prettier": "^1.17.0"
   },
-  "dependencies": {
-    "round-to": "^3.0.0"
-  }
+  "dependencies": {}
 }
