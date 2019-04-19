@@ -108,19 +108,19 @@ const Millify = (value, options = {}) => {
   const opts = { ...defaultOptions, ...options }
 
   // Validate value for type and length
-  const val = parseValue(value)
+  let val = parseValue(value)
 
   // Add a minus sign (-) prefix if it's a negative number
   const prefix = val < 0 ? '-' : ''
 
-  // Work with a positive values
-  let input = Math.abs(val)
+  // Work with positive values
+  val = Math.abs(val)
 
-  // Keep dividing the input by the numerical grouping value (base)
+  // Keep dividing the input value by the numerical grouping value (base)
   // until the decimal and unit is deciphered
   let unit = 0
-  for (const div of divider(input, opts.base)) {
-    input = div.result
+  for (const div of divider(val, opts.base)) {
+    val = div.result
     unit = div.count
   }
 
@@ -136,7 +136,7 @@ const Millify = (value, options = {}) => {
   const space = opts.space ? ' ' : ''
 
   // Round decimal up to desired precision
-  const rounded = round(input, opts.precision)
+  const rounded = round(val, opts.precision)
 
   // Replace decimal mark if desired
   const formatted = rounded
