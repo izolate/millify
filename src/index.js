@@ -6,6 +6,7 @@ const ERROR_INVALID_VALUE = 'Value must be a valid number'
 const ERROR_UNSAFE_VALUE = 'Value is either too big or too small'
 const ERROR_INFINITE_VALUE = 'Value must be a finite number'
 const ERROR_INVALID_PRECISION = 'Precision must be a non-negative integer'
+const ERROR_INVALID_UNITS = 'Units must be an array'
 
 const UNIT_THOUSAND = 'K'
 const UNIT_MILLION = 'M'
@@ -106,6 +107,10 @@ const round = (value, precision) => {
 const Millify = (value, options = {}) => {
   // Override default options with supplied ones
   const opts = { ...defaultOptions, ...options }
+
+  if (!Array.isArray(opts.units) || !opts.units.length) {
+    throw new Error(ERROR_INVALID_UNITS)
+  }
 
   // Validate value for type and length
   let val = parseValue(value)

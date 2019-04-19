@@ -7,8 +7,8 @@
     "millify": "src/cli.js"
   },
   "scripts": {
-    "test": "ava",
-    "lint": "eslint --fix src"
+    "test": "ava --verbose",
+    "lint": "eslint --fix test.js src"
   },
   "repository": {
     "type": "git",
