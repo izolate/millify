@@ -30,7 +30,7 @@ See `millify --help` for options.
 ### `millify(number, options)`
 
 ```js
-import millify from 'millify'
+const millify = require('millify')
 
 millify(2500)
 // 2.5K
