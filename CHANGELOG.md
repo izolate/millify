@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ability to run package from CLI.
 - Option `units` to override default suffixes.
 - Option `space` to add a space between digit and suffix.
+- Option `decimalSeparator` to override default decimal separator.
 - Git hooks for code linting.
 - New tests.
 - Changelog.
