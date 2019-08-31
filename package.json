@@ -50,7 +50,7 @@
   },
   "homepage": "https://github.com/izolate/millify#readme",
   "devDependencies": {
-    "ava": "^1.4.1",
+    "ava": "^2.3.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
