@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const millify = require('./')
+const millify = require('../lib/millify')
 
 require('yargs').command(
   '$0 <number> [options]',

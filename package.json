@@ -2,13 +2,13 @@
   "name": "millify",
   "version": "3.1.0",
   "description": "Converts long numbers to pretty, human-readable strings",
-  "main": "src/index.js",
+  "main": "lib/millify.js",
   "bin": {
-    "millify": "src/cli.js"
+    "millify": "bin/millify.js"
   },
   "scripts": {
     "test": "ava --verbose",
-    "lint": "eslint --fix test.js src"
+    "lint": "eslint --fix lib/**/*.js"
   },
   "lint-staged": {
     "*.js": [
