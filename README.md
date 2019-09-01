@@ -17,17 +17,19 @@ Get it on [npm](https://www.npmjs.com/package/millify):
 ```bash
 npm install millify
 ```
+## Usage
 
-## Command line
+### Command line
+
 ```bash
 millify 10000
 # 10K
 ```
 See `millify --help` for options.
 
-## Programmatic usage
+### Programmatically
 
-### `millify(number, options)`
+#### `millify(number, options)`
 
 ```js
 const millify = require('millify')
