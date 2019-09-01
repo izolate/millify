@@ -69,7 +69,6 @@ test('allows custom units', t => {
 });
 
 test('throws error if value is invalid', t => {
-  t.throws(() => millify('totally not a number'));
   t.throws(() => millify(Number.MAX_SAFE_INTEGER + 1));
   t.throws(() => millify(Number.MIN_SAFE_INTEGER - 1));
 });
