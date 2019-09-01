@@ -1,25 +1,20 @@
 import { defaultOptions, Options } from './options';
 import { parseValue, roundTo } from './utils';
 
-// Defines the result by the divider.
-interface Result {
-  value: number;
-  count: number;
-}
-
 /**
+ * Divides a number [value] until a decimal value is found.
+ *
  * A generator that divides a number [value] by a denominator,
  * defined by the grouping base (e.g. 1000 by default).
  *
- * Each successive turn multipies the base by itself, eventually
- * resulting in a decimal number and a turn count.
+ * The denominator is increased every turn by multiplying
+ * the base by itself, until a decimal value is created.
  *
  * @param {number} value - Number to be divided
  * @param {number} base - Grouping base/interval
  */
-function* divider(value: number, base: number): IterableIterator<Result> {
+function* divider(value: number, base: number): IterableIterator<number> {
   let denominator: number = base;
-  let count: number = 0;
 
   while (true) {
     const result: number = value / denominator;
@@ -27,7 +22,7 @@ function* divider(value: number, base: number): IterableIterator<Result> {
       return; // End of operation
     }
 
-    yield { value: result, count: ++count };
+    yield result;
 
     // Increase the denominator after each turn
     denominator *= base;
@@ -58,11 +53,10 @@ function Millify(value: number, options: Options): string {
   val = Math.abs(val);
 
   // Keep dividing the input value by the numerical grouping value (base)
-  // until the decimal and unit is deciphered
+  // until the decimal and unit index is deciphered
   let unitIndex: number = 0;
-  for (const turn of divider(val, opts.base)) {
-    val = turn.value;
-    // unitIndex = turn.count;
+  for (const result of divider(val, opts.base)) {
+    val = result;
     unitIndex += 1;
   }
 
