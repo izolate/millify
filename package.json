@@ -4,7 +4,7 @@
   "description": "Converts long numbers to pretty, human-readable strings",
   "main": "lib/millify.js",
   "bin": {
-    "millify": "bin/millify.js"
+    "millify": "bin/millify"
   },
   "scripts": {
     "build": "tsc",
@@ -12,6 +12,15 @@
     "lint": "tslint --fix -p tsconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint"
+  },
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "lint-staged": {
     "*.ts": [
@@ -57,7 +66,9 @@
     "husky": "^1.3.1",
     "lint-staged": "^8.1.5",
     "prettier": "^1.18.2",
+    "ts-node": "^8.3.0",
     "tslint": "^5.19.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.6.2"
   },
   "dependencies": {
