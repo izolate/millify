@@ -2,7 +2,8 @@
   "name": "millify",
   "version": "3.1.0",
   "description": "Converts long numbers to pretty, human-readable strings",
-  "main": "lib/millify.js",
+  "main": "dist/millify.js",
+  "types": "dist/millify.d.ts",
   "bin": {
     "millify": "bin/millify"
   },
