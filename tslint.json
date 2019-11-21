@@ -6,7 +6,7 @@
     ],
     "jsRules": {},
     "rules": {
-        "quotemark": [true, "single"],
+        "quotemark": [true, "double"],
         "interface-name": [true, "never-prefix"]
     },
     "rulesDirectory": []

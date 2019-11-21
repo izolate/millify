@@ -1,5 +1,5 @@
-import { defaultOptions, Options } from './options';
-import { parseValue, roundTo } from './utils';
+import { defaultOptions, Options } from "./options";
+import { parseValue, roundTo } from "./utils";
 
 /**
  * Divides a number [value] until a decimal value is found.
@@ -40,14 +40,14 @@ function Millify(value: number, options = {}): string {
   const opts: Options = { ...defaultOptions, ...options };
 
   if (!Array.isArray(opts.units) || !opts.units.length) {
-    throw new Error('Units is empty or not an Array');
+    throw new Error("Units is empty or not an Array");
   }
 
   // Validate value for type and length
   let val: number = parseValue(value);
 
   // Add a minus sign (-) prefix if it's a negative number
-  const prefix: string = val < 0 ? '-' : '';
+  const prefix: string = val < 0 ? "-" : "";
 
   // Work with positive values
   val = Math.abs(val);
@@ -69,7 +69,7 @@ function Millify(value: number, options = {}): string {
     : opts.units[unitIndex];
 
   // Add a space between number and abbreviation
-  const space: string = opts.space ? ' ' : '';
+  const space: string = opts.space ? " " : "";
 
   // Round decimal up to desired precision
   const rounded: number = roundTo(val, opts.precision);
