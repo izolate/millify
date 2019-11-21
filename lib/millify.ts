@@ -1,4 +1,4 @@
-import { defaultOptions, Options, UserOptions } from "./options";
+import { defaultOptions, Options } from "./options";
 import { parseValue, roundTo } from "./utils";
 
 /**
@@ -35,9 +35,11 @@ function* divider(value: number, base: number): IterableIterator<number> {
  * @param {number} value - Number to convert
  * @param {Options} options
  */
-function Millify(value: number, userOptions: UserOptions = {}): string {
-  // Override default options with supplied ones
-  const options: Options = { ...defaultOptions, ...userOptions };
+function Millify(value: number, userOptions?: Options): string {
+  // Override default options with options supplied by user
+  const options: Options = userOptions
+    ? { ...defaultOptions, ...userOptions }
+    : defaultOptions;
 
   if (!Array.isArray(options.units) || !options.units.length) {
     throw new Error("Option `units` must be a non-empty array");
