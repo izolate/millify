@@ -17,7 +17,19 @@ export interface Options {
 }
 
 /**
- * Default options for Millify
+ * Defines options supplied by the user to override defaults.
+ */
+export interface UserOptions {
+  precision?: number;
+  decimalSeparator?: string;
+  lowerCase?: boolean;
+  space?: boolean;
+  base?: number;
+  units?: string[];
+}
+
+/**
+ * Default options for Millify.
  */
 export const defaultOptions: Options = {
   base: 1000,

@@ -1,4 +1,4 @@
-import { defaultOptions, Options } from "./options";
+import { defaultOptions, Options, UserOptions } from "./options";
 import { parseValue, roundTo } from "./utils";
 
 /**
@@ -35,12 +35,12 @@ function* divider(value: number, base: number): IterableIterator<number> {
  * @param {number} value - Number to convert
  * @param {Options} options
  */
-function Millify(value: number, options = {}): string {
+function Millify(value: number, userOptions: UserOptions = {}): string {
   // Override default options with supplied ones
-  const opts: Options = { ...defaultOptions, ...options };
+  const options: Options = { ...defaultOptions, ...userOptions };
 
-  if (!Array.isArray(opts.units) || !opts.units.length) {
-    throw new Error("Units is empty or not an Array");
+  if (!Array.isArray(options.units) || !options.units.length) {
+    throw new Error("Option `units` must be a non-empty array");
   }
 
   // Validate value for type and length
@@ -55,29 +55,30 @@ function Millify(value: number, options = {}): string {
   // Keep dividing the input value by the numerical grouping value (base)
   // until the decimal and unit index is deciphered
   let unitIndex: number = 0;
-  for (const result of divider(val, opts.base)) {
+  for (const result of divider(val, options.base)) {
     val = result;
     unitIndex += 1;
   }
 
   // Avoid out of bounds error by using the last available unit
-  unitIndex = unitIndex > opts.units.length ? opts.units.length - 1 : unitIndex;
+  unitIndex =
+    unitIndex > options.units.length ? options.units.length - 1 : unitIndex;
 
   // Calculate the unit suffix and apply lowercase option
-  const suffix = opts.lowerCase
-    ? opts.units[unitIndex].toLowerCase()
-    : opts.units[unitIndex];
+  const suffix = options.lowerCase
+    ? options.units[unitIndex].toLowerCase()
+    : options.units[unitIndex];
 
   // Add a space between number and abbreviation
-  const space: string = opts.space ? " " : "";
+  const space: string = options.space ? " " : "";
 
   // Round decimal up to desired precision
-  const rounded: number = roundTo(val, opts.precision);
+  const rounded: number = roundTo(val, options.precision);
 
   // Replace decimal mark if desired
   const formatted: string = rounded
     .toString()
-    .replace(defaultOptions.decimalSeparator, opts.decimalSeparator);
+    .replace(defaultOptions.decimalSeparator, options.decimalSeparator);
 
   return `${prefix}${formatted}${space}${suffix}`;
 }
