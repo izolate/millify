@@ -35,7 +35,7 @@ function* divider(value: number, base: number): IterableIterator<number> {
  * @param {number} value - Number to convert
  * @param {Options} options
  */
-function Millify(value: number, options: Options = {}): string {
+function Millify(value: number, options = {}): string {
   // Override default options with supplied ones
   const opts: Options = { ...defaultOptions, ...options };
 
