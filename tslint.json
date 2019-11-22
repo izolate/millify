@@ -1,13 +1,18 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended",
-        "tslint-config-prettier"
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "quotemark": [
+      true,
+      "double"
     ],
-    "jsRules": {},
-    "rules": {
-        "quotemark": [true, "single"],
-        "interface-name": [true, "never-prefix"]
-    },
-    "rulesDirectory": []
+    "interface-name": [
+      true,
+      "never-prefix"
+    ]
+  },
+  "rulesDirectory": []
 }
