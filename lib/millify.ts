@@ -35,7 +35,7 @@ function* divider(value: number, base: number): IterableIterator<number> {
  * @param {number} value - Number to convert
  * @param {Options} options
  */
-function Millify(value: number, userOptions?: Options): string {
+function Millify(value: number, userOptions?: Partial<Options>): string {
   // Override default options with options supplied by user
   const options: Options = userOptions
     ? { ...defaultOptions, ...userOptions }
@@ -57,7 +57,7 @@ function Millify(value: number, userOptions?: Options): string {
   // Keep dividing the input value by the numerical grouping value (base)
   // until the decimal and unit index is deciphered
   let unitIndex: number = 0;
-  for (const result of divider(val, options.base)) {
+  for (const result of divider(val, options.base!)) {
     val = result;
     unitIndex += 1;
   }
@@ -75,12 +75,12 @@ function Millify(value: number, userOptions?: Options): string {
   const space: string = options.space ? " " : "";
 
   // Round decimal up to desired precision
-  const rounded: number = roundTo(val, options.precision);
+  const rounded: number = roundTo(val, options.precision!);
 
   // Replace decimal mark if desired
   const formatted: string = rounded
     .toString()
-    .replace(defaultOptions.decimalSeparator, options.decimalSeparator);
+    .replace(defaultOptions.decimalSeparator!, options.decimalSeparator!);
 
   return `${prefix}${formatted}${space}${suffix}`;
 }
