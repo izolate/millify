@@ -4,7 +4,7 @@
  * @param {number} value
  */
 export function parseValue(value: number): number {
-  if (Number.isNaN(value)) {
+  if (Number.isNaN(value) || value === null || value === undefined) {
     throw new Error("Value is not a number");
   }
   if (value > Number.MAX_SAFE_INTEGER || value < Number.MIN_SAFE_INTEGER) {

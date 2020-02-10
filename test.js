@@ -71,6 +71,8 @@ test('allows custom units', t => {
 test('throws error if value is invalid', t => {
   t.throws(() => millify(Number.MAX_SAFE_INTEGER + 1));
   t.throws(() => millify(Number.MIN_SAFE_INTEGER - 1));
+  t.throws(() => millify());
+  t.throws(() => millify(null));
 });
 
 test('throws error if precision is invalid', t => {
