@@ -1,0 +1,5 @@
+lib
+.github
+tsconfig.json
+tslint.json
+test.js
