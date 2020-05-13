@@ -1,5 +1,5 @@
-import test from 'ava';
 import millify from './lib/millify';
+import test from 'ava';
 
 test('returns a string', t => {
   t.is(typeof millify(100), 'string');

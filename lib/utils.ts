@@ -4,13 +4,15 @@
  * @param {number} value
  */
 export function parseValue(value: number): number {
-  if (Number.isNaN(value) || value === null || value === undefined) {
+  const val: number = parseFloat(String(value));
+
+  if (isNaN(val)) {
     throw new Error("Value is not a number");
   }
-  if (value > Number.MAX_SAFE_INTEGER || value < Number.MIN_SAFE_INTEGER) {
+  if (val > Number.MAX_SAFE_INTEGER || val < Number.MIN_SAFE_INTEGER) {
     throw new RangeError("Value is either too big or too small");
   }
-  return value;
+  return val;
 }
 
 /**
