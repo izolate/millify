@@ -7,10 +7,10 @@ export function parseValue(value: number): number {
   const val: number = parseFloat(String(value));
 
   if (isNaN(val)) {
-    throw new Error("Value is not a number");
+    throw new Error(`Input value is not a number`);
   }
   if (val > Number.MAX_SAFE_INTEGER || val < Number.MIN_SAFE_INTEGER) {
-    throw new RangeError("Value is either too big or too small");
+    throw new RangeError("Input value is either too big or too small");
   }
   return val;
 }
@@ -23,7 +23,7 @@ export function parseValue(value: number): number {
  */
 export function roundTo(value: number, precision: number): number {
   if (!Number.isFinite(value)) {
-    throw new Error("Value is not a finite number");
+    throw new Error("Input value is not a finite number");
   }
   if (!Number.isInteger(precision) || precision < 0) {
     throw new Error("Precision is not a positive integer");

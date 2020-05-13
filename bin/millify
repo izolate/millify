@@ -48,7 +48,11 @@ require("yargs").command(
   },
   argv => {
     const options = { ...argv, decimalSeparator: argv.d };
-    // eslint-disable-next-line no-console
-    console.log(millify(argv.number, options));
+    try {
+      // eslint-disable-next-line no-console
+      console.log(millify(argv.number, options));
+    } catch(e) {
+      console.error('ERR!', e.message);
+    }
   }
 ).argv;
