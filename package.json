@@ -13,15 +13,6 @@
     "lint": "tslint --fix -p tsconfig.json",
     "prepublishOnly": "npm run build"
   },
-  "ava": {
-    "compileEnhancements": false,
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ]
-  },
   "lint-staged": {
     "*.ts": [
       "npm run lint",
@@ -62,12 +53,12 @@
   },
   "homepage": "https://github.com/izolate/millify#readme",
   "devDependencies": {
-    "ava": "^2.3.0",
+    "ava": "^3.8.2",
     "husky": "^3.0.5",
     "lint-staged": "^9.2.5",
-    "prettier": "^1.18.2",
+    "prettier": "^2.0.5",
     "ts-node": "^8.3.0",
-    "tslint": "^5.19.0",
+    "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.6.2"
   },
