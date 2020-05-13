@@ -11,8 +11,7 @@
     "build": "tsc",
     "test": "tsc && ava --verbose",
     "lint": "tslint --fix -p tsconfig.json",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint"
+    "prepublishOnly": "npm run build"
   },
   "ava": {
     "compileEnhancements": false,
