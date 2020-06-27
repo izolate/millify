@@ -46,7 +46,7 @@
     "trillion",
     "millify"
   ],
-  "author": "izolate <yoshtalwar@gmail.com> (http://izolate.net/)",
+  "author": "izolate <izolate@gmail.com> (http://izolate.net/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/izolate/millify/issues"
@@ -60,7 +60,7 @@
     "ts-node": "^8.3.0",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.6.2"
+    "typescript": "^3.9.5"
   },
   "dependencies": {
     "yargs": "^15.3.1"
