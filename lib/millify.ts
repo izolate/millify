@@ -51,7 +51,7 @@ function Millify(value: number, userOptions?: Partial<Options>): string {
   // Add a minus sign (-) prefix if it's a negative number
   const prefix: string = val < 0 ? "-" : "";
 
-  // Work with positive values
+  // Work only with positive values for simplicity's sake
   val = Math.abs(val);
 
   // Keep dividing the input value by the numerical grouping value (base)

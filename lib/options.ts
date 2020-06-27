@@ -1,18 +1,30 @@
 /**
- * Defines the options for Millify.
+ * Options used to configure Millify.
  */
 export interface Options {
-  // Number of significant figures
+  /**
+   * The number of significant figures
+   */
   precision: number;
-  // Type of decimal marker (e.g. ".")
+  /**
+   * The type of decimal marker (e.g. period ".")
+   */
   decimalSeparator: string;
-  // Lowercase units
+  /**
+   * Convert units to lower case
+   */
   lowerCase: boolean;
-  // Space between number and unit
+  /**
+   * Add a space between the number and the unit
+   */
   space: boolean;
-  // Numerical group
+  /**
+   * The numerical group
+   */
   base: number;
-  // List of units
+  /**
+   * A list of units to use
+   */
   units: string[];
 }
 
