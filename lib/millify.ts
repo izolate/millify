@@ -5,13 +5,10 @@ import { parseValue, roundTo } from "./utils";
  * Divides a number [value] until a decimal value is found.
  *
  * A generator that divides a number [value] by a denominator,
- * defined by the grouping base (e.g. 1000 by default).
+ * defined by the grouping base (interval) - `1000` by default.
  *
  * The denominator is increased every turn by multiplying
- * the base by itself, until a decimal value is created.
- *
- * @param {number} value - Number to be divided
- * @param {number} base - Grouping base/interval
+ * the base by itself, until a decimal value is realized.
  */
 function* divider(value: number, base: number): IterableIterator<number> {
   let denominator: number = base;
@@ -31,9 +28,6 @@ function* divider(value: number, base: number): IterableIterator<number> {
 
 /**
  * Millify converts long numbers to human-readable strings.
- *
- * @param {number} value - Number to convert
- * @param {Options} options
  */
 function Millify(value: number, userOptions?: Partial<Options>): string {
   // Override default options with options supplied by user
