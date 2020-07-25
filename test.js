@@ -66,6 +66,8 @@ test("allows custom units", (t) => {
   t.is(millify(Math.pow(10, 3), options), "1 g");
   t.is(millify(Math.pow(10, 6), options), "1 kg");
   t.is(millify(Math.pow(10, 9), options), "1 tonne");
+  // Test empty unit if unit array is of insufficient length
+  t.is(millify(Math.pow(10, 12), options), "1");
 });
 
 test("throws error if value is invalid", (t) => {

@@ -56,17 +56,21 @@ function Millify(value: number, userOptions?: Partial<Options>): string {
     unitIndex += 1;
   }
 
-  // Avoid out of bounds error by using the last available unit
-  unitIndex =
-    unitIndex > options.units.length ? options.units.length - 1 : unitIndex;
+  // Account for out of range errors in case the units array is not complete.
+  const unitIndexOutOfRange = unitIndex >= options.units.length
 
-  // Calculate the unit suffix and apply lowercase option
-  const suffix = options.lowerCase
-    ? options.units[unitIndex].toLowerCase()
-    : options.units[unitIndex];
+  // Calculate the unit suffix and make it lowercase (if needed).
+  let suffix = ""
+  if (!unitIndexOutOfRange) {
+    const unit = options.units[unitIndex]
+    suffix = options.lowerCase ? unit.toLowerCase() : unit
+  } else {
+    // tslint:disable-next-line:no-console
+    console.warn("[Millify] Length of `units` array is insufficient. Add another number unit to remove this warning.")
+  }
 
   // Add a space between number and abbreviation
-  const space: string = options.space ? " " : "";
+  const space: string = options.space && !unitIndexOutOfRange ? " " : "";
 
   // Round decimal up to desired precision
   const rounded: number = roundTo(val, options.precision!);
