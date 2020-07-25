@@ -3,27 +3,32 @@
  */
 export interface Options {
   /**
-   * The number of significant figures
+   * The number of significant figures.
    */
   precision: number;
   /**
-   * The type of decimal marker (e.g. period ".")
+   * The type of decimal marker (e.g. period ".").
    */
   decimalSeparator: string;
   /**
-   * Convert units to lower case
+   * Convert units to lower case.
    */
-  lowerCase: boolean;
+  lowercase: boolean;
   /**
-   * Add a space between the number and the unit
+   * Convert units to lower case.
+   * @deprecated use `lowercase` instead.
+   */
+  lowerCase?: boolean;
+  /**
+   * Add a space between the number and the unit.
    */
   space: boolean;
   /**
-   * The numerical group
+   * The numerical group.
    */
   base: number;
   /**
-   * A list of units to use
+   * A list of units to use.
    */
   units: string[];
 }
@@ -34,7 +39,7 @@ export interface Options {
 export const defaultOptions: Options = {
   base: 1000,
   decimalSeparator: ".",
-  lowerCase: false,
+  lowercase: false,
   precision: 2,
   space: false,
   units: [

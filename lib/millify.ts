@@ -35,6 +35,11 @@ function Millify(value: number, userOptions?: Partial<Options>): string {
     ? { ...defaultOptions, ...userOptions }
     : defaultOptions;
 
+  // Allow backwards compatibility with API changes to lowercase option
+  if (userOptions?.lowerCase !== undefined) {
+    options.lowercase = userOptions.lowerCase;
+  }
+
   if (!Array.isArray(options.units) || !options.units.length) {
     throw new Error("Option `units` must be a non-empty array");
   }
@@ -57,16 +62,18 @@ function Millify(value: number, userOptions?: Partial<Options>): string {
   }
 
   // Account for out of range errors in case the units array is not complete.
-  const unitIndexOutOfRange = unitIndex >= options.units.length
+  const unitIndexOutOfRange = unitIndex >= options.units.length;
 
   // Calculate the unit suffix and make it lowercase (if needed).
-  let suffix = ""
+  let suffix = "";
   if (!unitIndexOutOfRange) {
-    const unit = options.units[unitIndex]
-    suffix = options.lowerCase ? unit.toLowerCase() : unit
+    const unit = options.units[unitIndex];
+    suffix = options.lowercase ? unit.toLowerCase() : unit;
   } else {
     // tslint:disable-next-line:no-console
-    console.warn("[Millify] Length of `units` array is insufficient. Add another number unit to remove this warning.")
+    console.warn(
+      "[Millify] Length of `units` array is insufficient. Add another number unit to remove this warning."
+    );
   }
 
   // Add a space between number and abbreviation

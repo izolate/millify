@@ -39,7 +39,7 @@ millify(2500)
 
 millify(1024000, {
   precision: 3,
-  lowerCase: true
+  lowercase: true
 })
 // 1.024m
 
@@ -62,6 +62,6 @@ Name | Type | Default | Description
 --- | --- | --- | ---
 `precision` | `number` | `2` | Number of significant figures to use
 `decimalSeparator` | `string` | `'.'` | Desired decimal separator (e.g. decimal point or comma)
-`lowerCase` | `boolean` | `false` | Use lowercase abbreviations
+`lowercase` | `boolean` | `false` | Use lowercase abbreviations
 `space` | `boolean` | `false` | Add a space between number and abbreviation
 `units` | `Array<string>` | `['', 'K', 'M', 'B', 'T', 'P', 'E']` | Unit abbreviations

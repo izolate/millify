@@ -22,12 +22,22 @@ test("handles negative numbers like positive ones", (t) => {
 });
 
 test("uses lowercase suffixes", (t) => {
-  const options = { lowerCase: true };
+  const options = { lowercase: true };
   t.is(millify(1000, options), "1k");
   t.is(millify(1000000, options), "1m");
   t.is(millify(1000000000, options), "1b");
   t.is(millify(1000000000000, options), "1t");
 });
+
+test("accepts lowercase and lowerCase options", (t) => {
+  const value = '1234567890'
+  const expected = '1.23b'
+  t.is(millify(value, { lowercase: true }), expected)
+  t.is(millify(value, { lowerCase: true }), expected)
+  t.is(millify(value, { lowercase: true, lowerCase: true }), expected)
+  t.is(millify(value, { lowercase: false, lowerCase: true }), expected)
+  t.is(millify(value, { lowercase: true, lowerCase: false }), '1.23B')
+})
 
 test("precision adjusts according to options", (t) => {
   const value = 12345.6789;
