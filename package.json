@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "tsc && ava --verbose",
+    "test": "npm run build && ava --verbose",
     "lint": "eslint . --ext .ts --fix",
     "prepublishOnly": "npm run build"
   },

@@ -27,9 +27,9 @@ function* divider(value: number, base: number): IterableIterator<number> {
 }
 
 /**
- * Millify converts long numbers to human-readable strings.
+ * millify converts long numbers to human-readable strings.
  */
-function Millify(value: number, options?: Partial<Options>): string {
+export function millify(value: number, options?: Partial<Options>): string {
   // Override default options with options supplied by user
   const opts: Options = options
     ? { ...defaultOptions, ...options }
@@ -72,7 +72,7 @@ function Millify(value: number, options?: Partial<Options>): string {
   } else {
     // eslint-disable-next-line no-console
     console.warn(
-      "[Millify] `options.units` array is of insufficient length. Add another unit to silence this warning.",
+      "[millify] `options.units` array is of insufficient length. Add another unit to silence this warning.",
     );
   }
 
@@ -89,7 +89,3 @@ function Millify(value: number, options?: Partial<Options>): string {
 
   return `${prefix}${formatted}${space}${suffix}`;
 }
-
-export const millify = Millify;
-
-export default Millify;

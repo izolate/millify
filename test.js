@@ -1,4 +1,4 @@
-const { default: millify } = require("./dist/millify");
+const { millify } = require("./dist/millify");
 const test = require("ava");
 
 test("returns a string", (t) => {
@@ -30,14 +30,14 @@ test("uses lowercase suffixes", (t) => {
 });
 
 test("accepts lowercase and lowerCase options", (t) => {
-  const value = '1234567890'
-  const expected = '1.23b'
-  t.is(millify(value, { lowercase: true }), expected)
-  t.is(millify(value, { lowerCase: true }), expected)
-  t.is(millify(value, { lowercase: true, lowerCase: true }), expected)
-  t.is(millify(value, { lowercase: false, lowerCase: true }), expected)
-  t.is(millify(value, { lowercase: true, lowerCase: false }), '1.23B')
-})
+  const value = "1234567890";
+  const expected = "1.23b";
+  t.is(millify(value, { lowercase: true }), expected);
+  t.is(millify(value, { lowerCase: true }), expected);
+  t.is(millify(value, { lowercase: true, lowerCase: true }), expected);
+  t.is(millify(value, { lowercase: false, lowerCase: true }), expected);
+  t.is(millify(value, { lowercase: true, lowerCase: false }), "1.23B");
+});
 
 test("precision adjusts according to options", (t) => {
   const value = 12345.6789;
@@ -53,7 +53,7 @@ test("precision adjusts according to options", (t) => {
   ];
 
   expected.forEach((exp, precision) =>
-    t.is(exp, millify(value, { precision }))
+    t.is(exp, millify(value, { precision })),
   );
 });
 
