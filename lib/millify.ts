@@ -1,4 +1,4 @@
-import { defaultOptions, Options } from "./options";
+import { Options, defaultOptions } from "./options";
 import { parseValue, roundTo } from "./utils";
 
 /**
@@ -27,67 +27,65 @@ function* divider(value: number, base: number): IterableIterator<number> {
 }
 
 /**
- * Millify converts long numbers to human-readable strings.
+ * millify converts long numbers to human-readable strings.
  */
-function Millify(value: number, userOptions?: Partial<Options>): string {
+export function millify(value: number, options?: Partial<Options>): string {
   // Override default options with options supplied by user
-  const options: Options = userOptions
-    ? { ...defaultOptions, ...userOptions }
+  const opts: Options = options
+    ? { ...defaultOptions, ...options }
     : defaultOptions;
 
   // Allow backwards compatibility with API changes to lowercase option
-  if (userOptions?.lowerCase !== undefined) {
-    options.lowercase = userOptions.lowerCase;
+  if (options?.lowerCase !== undefined) {
+    opts.lowercase = options.lowerCase;
   }
 
-  if (!Array.isArray(options.units) || !options.units.length) {
+  if (!Array.isArray(opts.units) || !opts.units.length) {
     throw new Error("Option `units` must be a non-empty array");
   }
 
   // Validate value for type and length
-  let val: number = parseValue(value);
+  let val = parseValue(value);
 
   // Add a minus sign (-) prefix if it's a negative number
-  const prefix: string = val < 0 ? "-" : "";
+  const prefix = val < 0 ? "-" : "";
 
   // Work only with positive values for simplicity's sake
   val = Math.abs(val);
 
   // Keep dividing the input value by the numerical grouping value (base)
   // until the decimal and unit index is deciphered
-  let unitIndex: number = 0;
-  for (const result of divider(val, options.base!)) {
+  let unitIndex = 0;
+  for (const result of divider(val, opts.base)) {
     val = result;
     unitIndex += 1;
   }
 
   // Account for out of range errors in case the units array is not complete.
-  const unitIndexOutOfRange = unitIndex >= options.units.length;
+  const unitIndexOutOfRange = unitIndex >= opts.units.length;
 
   // Calculate the unit suffix and make it lowercase (if needed).
   let suffix = "";
   if (!unitIndexOutOfRange) {
-    const unit = options.units[unitIndex];
-    suffix = options.lowercase ? unit.toLowerCase() : unit;
+    const unit = opts.units[unitIndex];
+    suffix = opts.lowercase ? unit.toLowerCase() : unit;
   } else {
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     console.warn(
-      "[Millify] Length of `units` array is insufficient. Add another number unit to remove this warning."
+      "[millify] `options.units` array is of insufficient length. Add another unit to silence this warning.",
     );
   }
 
   // Add a space between number and abbreviation
-  const space: string = options.space && !unitIndexOutOfRange ? " " : "";
+  const space: string = opts.space && !unitIndexOutOfRange ? " " : "";
 
   // Round decimal up to desired precision
-  const rounded: number = roundTo(val, options.precision!);
+  const rounded = roundTo(val, opts.precision);
 
   // Replace decimal mark if desired
-  const formatted: string = rounded
+  const formatted = rounded
     .toString()
-    .replace(defaultOptions.decimalSeparator!, options.decimalSeparator!);
+    .replace(defaultOptions.decimalSeparator, opts.decimalSeparator);
 
   return `${prefix}${formatted}${space}${suffix}`;
 }
-
-export default Millify;
