@@ -29,7 +29,7 @@ function* divider(value: number, base: number): IterableIterator<number> {
 /**
  * millify converts long numbers to human-readable strings.
  */
-export function millify(value: number, options?: Partial<Options>): string {
+function millify(value: number, options?: Partial<Options>): string {
   // Override default options with options supplied by user
   const opts: Options = options
     ? { ...defaultOptions, ...options }
@@ -89,3 +89,7 @@ export function millify(value: number, options?: Partial<Options>): string {
 
   return `${prefix}${formatted}${space}${suffix}`;
 }
+
+export { millify };
+
+export default millify;

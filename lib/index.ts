@@ -1,1 +1,5 @@
-export { millify } from "./millify";
+import millify from "./millify";
+
+export { millify };
+
+export default millify;
