@@ -32,27 +32,27 @@ See `millify --help` for options.
 #### `millify(number, options)`
 
 ```js
-const millify = require('millify')
+const { millify } = require('millify');
 
-millify(2500)
+millify(2500);
 // 2.5K
 
 millify(1024000, {
   precision: 3,
   lowercase: true
-})
+});
 // 1.024m
 
 millify(39500, {
   precision: 2,  
   decimalSeparator: ','
-})
+});
 // 3,95K
 
 millify(1440000, {
   units: ['B', 'KB', 'MB', 'GB'],
   space: true,
-})
+});
 // 1.44 MB
 ```
 
