@@ -1,6 +1,6 @@
 {
   "name": "millify",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "description": "Converts long numbers to pretty, human-readable strings",
   "main": "dist/millify.js",
   "types": "dist/millify.d.ts",
