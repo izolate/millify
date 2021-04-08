@@ -32,10 +32,11 @@ See `millify --help` for options.
 #### `millify(number, options)`
 
 ```js
-const { millify } = require('millify');
+import millify from 'millify';
 
-millify(2500);
-// 2.5K
+// For CommonJS: `const { millify } = require('millify');`
+
+millify(2500); // 2.5K
 
 millify(1024000, {
   precision: 3,
