@@ -15,18 +15,9 @@ export interface Options {
    */
   lowercase: boolean;
   /**
-   * Convert units to lower case.
-   * @deprecated use `lowercase` instead.
-   */
-  lowerCase?: boolean;
-  /**
    * Add a space between the number and the unit.
    */
   space: boolean;
-  /**
-   * The numerical group.
-   */
-  base: number;
   /**
    * A list of units to use.
    */
@@ -37,7 +28,6 @@ export interface Options {
  * Default options for Millify.
  */
 export const defaultOptions: Options = {
-  base: 1000,
   decimalSeparator: ".",
   lowercase: false,
   precision: 2,

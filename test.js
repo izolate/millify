@@ -6,37 +6,58 @@ test("returns a string", (t) => {
 });
 
 test("uses correct suffixes with default options", (t) => {
-  t.is(millify(100), "100");
-  t.is(millify(1000), "1K");
-  t.is(millify(1000000), "1M");
-  t.is(millify(1000000000), "1B");
-  t.is(millify(1000000000000), "1T");
+  const tests = new Map([
+    [100, "100"],
+    [1000, "1K"],
+    [1000000, "1M"],
+    [1000000000, "1B"],
+    [1000000000000, "1T"],
+  ]);
+
+  for (const [value, expected] of tests.entries()) {
+    t.is(millify(value), expected);
+  }
+});
+
+test("rounds up to the nearest group", (t) => {
+  const tests = new Map([
+    [999999, "1M"], // Not 1000K
+    [999999999, "1B"], // Not 1000M
+    [999999999999, "1T"], // Not 1000B
+    [999000000000, "999B"],
+  ]);
+
+  for (const [value, expected] of tests.entries()) {
+    t.is(millify(value, {precision: 1}), expected);
+  }
 });
 
 test("handles negative numbers like positive ones", (t) => {
-  t.is(millify(-100), "-100");
-  t.is(millify(-1000), "-1K");
-  t.is(millify(-1000000), "-1M");
-  t.is(millify(-1000000000), "-1B");
-  t.is(millify(-1000000000000), "-1T");
+  const tests = new Map([
+    [-100, "-100"],
+    [-1000, "-1K"],
+    [-1000000, "-1M"],
+    [-1000000000, "-1B"],
+    [-1000000000000, "-1T"],
+  ]);
+
+  for (const [value, expected] of tests.entries()) {
+    t.is(millify(value), expected)
+  }
 });
 
 test("uses lowercase suffixes", (t) => {
   const options = { lowercase: true };
-  t.is(millify(1000, options), "1k");
-  t.is(millify(1000000, options), "1m");
-  t.is(millify(1000000000, options), "1b");
-  t.is(millify(1000000000000, options), "1t");
-});
+  const tests = new Map([
+    [1000, "1k"],
+    [1000000, "1m"],
+    [1000000000, "1b"],
+    [1000000000000, "1t"],
+  ]);
 
-test("accepts lowercase and lowerCase options", (t) => {
-  const value = "1234567890";
-  const expected = "1.23b";
-  t.is(millify(value, { lowercase: true }), expected);
-  t.is(millify(value, { lowerCase: true }), expected);
-  t.is(millify(value, { lowercase: true, lowerCase: true }), expected);
-  t.is(millify(value, { lowercase: false, lowerCase: true }), expected);
-  t.is(millify(value, { lowercase: true, lowerCase: false }), "1.23B");
+  for (const [value, expected] of tests.entries()) {
+    t.is(millify(value, options), expected);
+  }
 });
 
 test("precision adjusts according to options", (t) => {
@@ -72,12 +93,20 @@ test("allows a space between decimal and unit", (t) => {
 test("allows custom units", (t) => {
   const options = { units: ["mg", "g", "kg", "tonne"], space: true };
 
-  t.is(millify(Math.pow(10, 0), options), "1 mg");
-  t.is(millify(Math.pow(10, 3), options), "1 g");
-  t.is(millify(Math.pow(10, 6), options), "1 kg");
-  t.is(millify(Math.pow(10, 9), options), "1 tonne");
-  // Test empty unit if unit array is of insufficient length
-  t.is(millify(Math.pow(10, 12), options), "1");
+  const tests = new Map([
+    [Math.pow(10, 0), "1 mg"],
+    [Math.pow(10, 3), "1 g"],
+    [Math.pow(10, 6), "1 kg"],
+    [Math.pow(10, 9), "1 tonne"],
+  ]);
+
+  for (const [value, expected] of tests.entries()) {
+    t.is(millify(value, options), expected);
+  }
+
+  // It should return the original number if there is no unit available
+  const largeVal = Math.pow(10, 12);
+  t.is(millify(largeVal, options), largeVal.toString());
 });
 
 test("throws error if value is invalid", (t) => {
