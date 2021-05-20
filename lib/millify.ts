@@ -1,4 +1,4 @@
-import { Options, defaultOptions } from "./options";
+import { MillifyOptions, defaultOptions } from "./options";
 import { parseValue, roundTo } from "./utils";
 
 // Most commonly used digit grouping base.
@@ -34,9 +34,9 @@ function* divider(value: number): IterableIterator<number> {
 /**
  * millify converts long numbers to human-readable strings.
  */
-function millify(value: number, options?: Partial<Options>): string {
+function millify(value: number, options?: Partial<MillifyOptions>): string {
   // Override default options with options supplied by user.
-  const opts: Options = options
+  const opts: MillifyOptions = options
     ? { ...defaultOptions, ...options }
     : defaultOptions;
 

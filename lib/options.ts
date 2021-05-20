@@ -1,7 +1,7 @@
 /**
  * Options used to configure Millify.
  */
-export interface Options {
+export interface MillifyOptions {
   /**
    * The number of significant figures.
    */
@@ -27,10 +27,10 @@ export interface Options {
 /**
  * Default options for Millify.
  */
-export const defaultOptions: Options = {
+export const defaultOptions: MillifyOptions = {
   decimalSeparator: ".",
   lowercase: false,
-  precision: 2,
+  precision: 1,
   space: false,
   units: [
     "",

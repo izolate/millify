@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Returns the original number if no unit is available.
+- Default precision to 1 instead of 2. (**BREAKING CHANGE**)
+- `Options` interface name to `MillifyOptions`. (**BREAKING CHANGE**)
 
 ### Removed
 - `base` from options. We only intend to support the common grouping base (1000). (**BREAKING CHANGE**)

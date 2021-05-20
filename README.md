@@ -22,19 +22,20 @@ npm install millify
 ### Command line
 
 ```bash
-millify 10000
-# 10K
+$ millify 12345
+12.3K
 ```
+
 See `millify --help` for options.
 
 ### Programmatically
 
-#### `millify(number, options)`
+#### `millify(value: number, options: MillifyOptions)`
 
 ```js
-import millify from 'millify';
+import millify from "millify";
 
-// For CommonJS: `const { millify } = require('millify');`
+// For CommonJS: `const { millify } = require("millify");`
 
 millify(2500); // 2.5K
 
@@ -46,12 +47,12 @@ millify(1024000, {
 
 millify(39500, {
   precision: 2,  
-  decimalSeparator: ','
+  decimalSeparator: ","
 });
 // 3,95K
 
 millify(1440000, {
-  units: ['B', 'KB', 'MB', 'GB'],
+  units: ["B", "KB", "MB", "GB", "TB"],
   space: true,
 });
 // 1.44 MB
@@ -61,7 +62,7 @@ millify(1440000, {
 
 Name | Type | Default | Description
 --- | --- | --- | ---
-`precision` | `number` | `2` | Number of significant figures to use
+`precision` | `number` | `1` | Number of decimal places to use
 `decimalSeparator` | `string` | `'.'` | Desired decimal separator (e.g. decimal point or comma)
 `lowercase` | `boolean` | `false` | Use lowercase abbreviations
 `space` | `boolean` | `false` | Add a space between number and abbreviation

@@ -12,10 +12,10 @@ require("yargs").command(
         type: "number",
       })
       .option("precision", {
-        describe: "Decimal places",
+        describe: "Number of decimal places",
         alias: "p",
         type: "number",
-        default: 2,
+        default: 1,
       })
       .option("decimal", {
         describe: "Decimal separator (mark)",
