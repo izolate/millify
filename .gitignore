@@ -31,3 +31,6 @@ node_modules
 
 # TypeScript compiled files
 dist/
+
+# MacOS
+.DS_Store
