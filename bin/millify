@@ -4,7 +4,7 @@ const { millify } = require("../dist/millify");
 
 require("yargs").command(
   "$0 <number> [options]",
-  "convert number to pretty, human-readable string",
+  "Convert long numbers to pretty, human-readable strings",
   (yargs) => {
     return yargs
       .positional("number", {
