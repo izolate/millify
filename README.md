@@ -1,4 +1,5 @@
-# Millify [![Build Status](https://travis-ci.org/izolate/millify.svg?branch=master)](https://travis-ci.org/izolate/millify)
+# Millify
+
 Converts long `numbers` into pretty, human-readable `strings`.
 
 Before :unamused: | After :tada:
