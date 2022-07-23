@@ -28,7 +28,7 @@ test("rounds up to the nearest group", (t) => {
   ]);
 
   for (const [value, expected] of tests.entries()) {
-    t.is(millify(value, {precision: 1}), expected);
+    t.is(millify(value, { precision: 1 }), expected);
   }
 });
 
@@ -42,7 +42,7 @@ test("handles negative numbers like positive ones", (t) => {
   ]);
 
   for (const [value, expected] of tests.entries()) {
-    t.is(millify(value), expected)
+    t.is(millify(value), expected);
   }
 });
 
@@ -109,11 +109,25 @@ test("allows custom units", (t) => {
   t.is(millify(largeVal, options), largeVal.toString());
 });
 
+test("throws error if value is outside safe range", (t) => {
+  const invalidValues = [
+    Number.MAX_SAFE_INTEGER + 1,
+    Number.MIN_SAFE_INTEGER - 1,
+  ];
+  for (const value of invalidValues) {
+    t.throws(() => millify(value), {
+      message: "Input value is outside of safe integer range",
+    });
+  }
+});
+
 test("throws error if value is invalid", (t) => {
-  t.throws(() => millify(Number.MAX_SAFE_INTEGER + 1));
-  t.throws(() => millify(Number.MIN_SAFE_INTEGER - 1));
-  t.throws(() => millify());
-  t.throws(() => millify(null));
+  const invalidValues = [undefined, null];
+  for (const value of invalidValues) {
+    t.throws(() => millify(value), {
+      message: "Input value is not a number",
+    });
+  }
 });
 
 test("throws error if precision is invalid", (t) => {

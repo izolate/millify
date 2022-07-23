@@ -2,7 +2,7 @@
  * parseValue ensures the value is a number and within accepted range.
  */
 export function parseValue(value: number): number {
-  const val: number = parseFloat(value.toString());
+  const val: number = parseFloat(value?.toString());
 
   if (isNaN(val)) {
     throw new Error(`Input value is not a number`);
