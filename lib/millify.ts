@@ -44,8 +44,16 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
     throw new Error("Option `units` must be a non-empty array");
   }
 
-  // Validate value for type and length.
-  let val = parseValue(value);
+  // If the input value is invalid, then return the value in string form.
+  // Originally this threw an error, but was changed to return a graceful fallback.
+  let val: number;
+  try {
+    val = parseValue(value);
+  } catch (e: any) {
+    console.warn(`WARN: ${e.message} (millify)`);
+    // Invalid values will be converted to string as per `String()`.
+    return String(value);
+  }
 
   // Add a minus sign (-) prefix if it's a negative number.
   const prefix = val < 0 ? "-" : "";

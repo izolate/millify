@@ -109,24 +109,15 @@ test("allows custom units", (t) => {
   t.is(millify(largeVal, options), largeVal.toString());
 });
 
-test("throws error if value is outside safe range", (t) => {
+test("graceful fallback if value is outside safe range", (t) => {
   const invalidValues = [
     Number.MAX_SAFE_INTEGER + 1,
     Number.MIN_SAFE_INTEGER - 1,
+    undefined,
+    null,
   ];
   for (const value of invalidValues) {
-    t.throws(() => millify(value), {
-      message: "Input value is outside of safe integer range",
-    });
-  }
-});
-
-test("throws error if value is invalid", (t) => {
-  const invalidValues = [undefined, null];
-  for (const value of invalidValues) {
-    t.throws(() => millify(value), {
-      message: "Input value is not a number",
-    });
+    t.is(String(value), millify(value));
   }
 });
 
