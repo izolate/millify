@@ -1,4 +1,4 @@
-import { MillifyOptions, defaultOptions } from "./options";
+import { defaultOptions } from "./options";
 import { parseValue, roundTo } from "./utils";
 
 // Most commonly used digit grouping base.
