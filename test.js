@@ -109,12 +109,16 @@ test("allows custom units", (t) => {
   t.is(millify(largeVal, options), largeVal.toString());
 });
 
-test("graceful fallback if value is outside safe range", (t) => {
+test("graceful fallback if value is invalid", (t) => {
   const invalidValues = [
     Number.MAX_SAFE_INTEGER + 1,
     Number.MIN_SAFE_INTEGER - 1,
     undefined,
     null,
+    Symbol("foo"),
+    new Set([1, 2, 3]),
+    new Map(),
+    { foo: 1 },
   ];
   for (const value of invalidValues) {
     t.is(String(value), millify(value));

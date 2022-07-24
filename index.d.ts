@@ -1,7 +1,7 @@
 /**
  * Options used to configure Millify.
  */
-declare interface MillifyOptions {
+interface MillifyOptions {
   /**
    * The number of significant figures.
    */
