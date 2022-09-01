@@ -1,7 +1,7 @@
 /**
  * Options used to configure Millify.
  */
-interface MillifyOptions {
+export interface MillifyOptions {
   /**
    * The number of significant figures.
    */

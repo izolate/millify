@@ -1,3 +1,4 @@
+import type { MillifyOptions } from "..";
 import { defaultOptions } from "./options";
 import { parseValue, roundTo } from "./utils";
 

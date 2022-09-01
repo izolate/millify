@@ -1,3 +1,5 @@
+import type { MillifyOptions } from "..";
+
 /**
  * Default options for Millify.
  */
