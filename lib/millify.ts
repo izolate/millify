@@ -1,4 +1,4 @@
-import { defaultOptions } from "./options";
+import { defaultOptions, MillifyOptions } from "./options";
 import { parseValue, roundTo } from "./utils";
 
 // Most commonly used digit grouping base.
@@ -49,8 +49,10 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
   let val: number;
   try {
     val = parseValue(value);
-  } catch (e: any) {
-    console.warn(`WARN: ${e.message} (millify)`);
+  } catch (e) {
+    if (e instanceof Error) {
+      console.warn(`WARN: ${e.message} (millify)`);
+    }
     // Invalid values will be converted to string as per `String()`.
     return String(value);
   }
