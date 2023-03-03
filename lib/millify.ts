@@ -75,7 +75,7 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
   // a corresponding unit. Returning anything else is ambiguous.
   const unitIndexOutOfRange = unitIndex >= opts.units.length;
   if (unitIndexOutOfRange) {
-    return value.toString();
+    return value.toLocaleString();
   }
 
   // Round decimal up to desired precision.
@@ -97,9 +97,10 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
 
   // Replace decimal mark if desired.
   const defaultDecimalSeparator = getDefaultDecimalSeaparator();
-  const formatted = rounded
-    .toString()
-    .replace(defaultDecimalSeparator, opts.decimalSeparator);
+  let formatted = rounded.toLocaleString();
+  if (opts.decimalSeparator) {
+    formatted = formatted.replace(defaultDecimalSeparator, opts.decimalSeparator);
+  }
 
   return `${prefix}${formatted}${space}${suffix}`;
 }
