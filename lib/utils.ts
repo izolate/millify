@@ -34,7 +34,7 @@ export function roundTo(value: number, precision: number): number {
  */
 export function getDefaultDecimalSeaparator(): string {
   const numberWithDecimalSeparator = 1.1;
-  return Intl.NumberFormat(locale)
+  return Intl.NumberFormat()
       .formatToParts(numberWithDecimalSeparator)
       .find(part => part.type === 'decimal')
       .value;
