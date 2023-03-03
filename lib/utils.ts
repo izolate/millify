@@ -33,9 +33,7 @@ export function roundTo(value: number, precision: number): number {
  * Calculates the default decimal separator given the current locale
  */
 export function getDefaultDecimalSeaparator(): string {
-  const numberWithDecimalSeparator = 1.1;
-  return Intl.NumberFormat()
-      .formatToParts(numberWithDecimalSeparator)
-      .find(part => part.type === 'decimal')
-      .value;
+  const value = 1.1;
+  const result = value.toLocaleString().substring(1, 2);
+  return result;
 }
