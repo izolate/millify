@@ -1,5 +1,5 @@
 import { defaultOptions, MillifyOptions } from "./options";
-import { parseValue, roundTo } from "./utils";
+import { parseValue, roundTo, getDefaultDecimalSeparator } from "./utils";
 
 // Most commonly used digit grouping base.
 const DIGIT_GROUPING_BASE = 1000;
@@ -96,9 +96,10 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
   const space = opts.space ? " " : "";
 
   // Replace decimal mark if desired.
+  const defaultDecimalSeparator = getDefaultDecimalSeaparator();
   const formatted = rounded
     .toString()
-    .replace(defaultOptions.decimalSeparator, opts.decimalSeparator);
+    .replace(defaultDecimalSeparator, opts.decimalSeparator);
 
   return `${prefix}${formatted}${space}${suffix}`;
 }
