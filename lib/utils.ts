@@ -28,3 +28,12 @@ export function roundTo(value: number, precision: number): number {
   }
   return parseFloat(value.toFixed(precision));
 }
+
+/**
+ * Calculates the default decimal separator given the current locale
+ */
+export function getDefaultDecimalSeparator(): string {
+  const value = 1.1;
+  const result = value.toLocaleString().substring(1, 2);
+  return result;
+}

@@ -7,9 +7,9 @@ export interface MillifyOptions {
    */
   precision: number;
   /**
-   * The type of decimal marker (e.g. period ".").
+   * The type of decimal marker (e.g. period "."") or *null* to use locale default.
    */
-  decimalSeparator: string;
+  decimalSeparator: string | null;
   /**
    * Convert units to lower case.
    */
@@ -28,7 +28,7 @@ export interface MillifyOptions {
  * Default options for Millify.
  */
 export const defaultOptions: MillifyOptions = {
-  decimalSeparator: ".",
+  decimalSeparator: null,
   lowercase: false,
   precision: 1,
   space: false,

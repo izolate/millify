@@ -1,5 +1,5 @@
 import { defaultOptions, MillifyOptions } from "./options";
-import { parseValue, roundTo } from "./utils";
+import { parseValue, roundTo, getDefaultDecimalSeparator } from "./utils";
 
 // Most commonly used digit grouping base.
 const DIGIT_GROUPING_BASE = 1000;
@@ -75,7 +75,7 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
   // a corresponding unit. Returning anything else is ambiguous.
   const unitIndexOutOfRange = unitIndex >= opts.units.length;
   if (unitIndexOutOfRange) {
-    return value.toString();
+    return value.toLocaleString();
   }
 
   // Round decimal up to desired precision.
@@ -96,9 +96,11 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
   const space = opts.space ? " " : "";
 
   // Replace decimal mark if desired.
-  const formatted = rounded
-    .toString()
-    .replace(defaultOptions.decimalSeparator, opts.decimalSeparator);
+  const defaultDecimalSeparator = getDefaultDecimalSeaparator();
+  let formatted = rounded.toLocaleString();
+  if (opts.decimalSeparator) {
+    formatted = formatted.replace(defaultDecimalSeparator, opts.decimalSeparator);
+  }
 
   return `${prefix}${formatted}${space}${suffix}`;
 }
