@@ -64,7 +64,7 @@ millify(1440000, {
 Name | Type | Default | Description
 --- | --- | --- | ---
 `precision` | `number` | `1` | Number of decimal places to use
-`decimalSeparator` | `string` | `'.'` | Desired decimal separator (e.g. decimal point or comma)
+`locales` | `string | string[]` | `'.'` | Formats the number in different languages
 `lowercase` | `boolean` | `false` | Use lowercase abbreviations
 `space` | `boolean` | `false` | Add a space between number and abbreviation
 `units` | `Array<string>` | `['', 'K', 'M', 'B', 'T', 'P', 'E']` | Unit abbreviations
