@@ -39,3 +39,13 @@ export function getFractionDigits(num: number): number {
   const decimalPart = num.toString().split(".")[1];
   return decimalPart?.length ?? 0;
 }
+
+/**
+ * Returns the default browser locales.
+ */
+export function getLocales(): string[] {
+  if (typeof navigator === "undefined") {
+    return [];
+  }
+  return Array.from(navigator.languages ?? []);
+}

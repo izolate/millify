@@ -1,5 +1,5 @@
 import { defaultOptions, MillifyOptions } from "./options";
-import { getFractionDigits, parseValue, roundTo } from "./utils";
+import { getFractionDigits, getLocales, parseValue, roundTo } from "./utils";
 
 // Most commonly used digit grouping base.
 const DIGIT_GROUPING_BASE = 1000;
@@ -98,7 +98,7 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
   const space = opts.space ? " " : "";
 
   // Format the number according to the desired locale.
-  const formatted = rounded.toLocaleString(opts.locales, {
+  const formatted = rounded.toLocaleString(opts.locales ?? getLocales(), {
     // toLocaleString needs the explicit fraction digits.
     minimumFractionDigits: getFractionDigits(rounded),
   });
