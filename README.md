@@ -48,7 +48,7 @@ millify(1024000, {
 
 millify(39500, {
   precision: 2,  
-  decimalSeparator: ","
+  locales: "de-DE"
 });
 // 3,95K
 
