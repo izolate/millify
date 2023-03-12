@@ -1,5 +1,5 @@
 import { defaultOptions, MillifyOptions } from "./options";
-import { parseValue, roundTo, getDefaultDecimalSeparator } from "./utils";
+import { getFractionDigits, parseValue, roundTo } from "./utils";
 
 // Most commonly used digit grouping base.
 const DIGIT_GROUPING_BASE = 1000;
@@ -75,7 +75,9 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
   // a corresponding unit. Returning anything else is ambiguous.
   const unitIndexOutOfRange = unitIndex >= opts.units.length;
   if (unitIndexOutOfRange) {
-    return value.toLocaleString();
+    // At this point we don't know what to do with the input value,
+    // so we return it as is, without localizing the string.
+    return value.toString();
   }
 
   // Round decimal up to desired precision.
@@ -95,12 +97,11 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
   // Add a space between number and abbreviation.
   const space = opts.space ? " " : "";
 
-  // Replace decimal mark if desired.
-  const defaultDecimalSeparator = getDefaultDecimalSeaparator();
-  let formatted = rounded.toLocaleString();
-  if (opts.decimalSeparator) {
-    formatted = formatted.replace(defaultDecimalSeparator, opts.decimalSeparator);
-  }
+  // Format the number according to the desired locale.
+  const formatted = rounded.toLocaleString(opts.locales, {
+    // toLocaleString needs the explicit fraction digits.
+    minimumFractionDigits: getFractionDigits(rounded),
+  });
 
   return `${prefix}${formatted}${space}${suffix}`;
 }

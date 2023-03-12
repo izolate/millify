@@ -30,10 +30,12 @@ export function roundTo(value: number, precision: number): number {
 }
 
 /**
- * Calculates the default decimal separator given the current locale
+ * Returns the number of digits after the decimal.
  */
-export function getDefaultDecimalSeparator(): string {
-  const value = 1.1;
-  const result = value.toLocaleString().substring(1, 2);
-  return result;
+export function getFractionDigits(num: number): number {
+  if (Number.isInteger(num)) {
+    return 0;
+  }
+  const decimalPart = num.toString().split(".")[1];
+  return decimalPart?.length ?? 0;
 }

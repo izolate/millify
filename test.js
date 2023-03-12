@@ -78,10 +78,15 @@ test("precision adjusts according to options", (t) => {
   );
 });
 
-test("allows a custom decimal separator", (t) => {
-  const result = millify(55500, { decimalSeparator: "_" });
-  const expected = "55_5K";
-  t.is(expected, result);
+test("formats to different languages", (t) => {
+  const tests = new Map([
+    ["en-US", "1.2"],
+    ["de-DE", "1,2"],
+    ["ar-SA", "١٫٢"],
+  ]);
+  for (const [locales, expected] of tests.entries()) {
+    t.is(millify(1.2, { locales }), expected);
+  }
 });
 
 test("allows a space between decimal and unit", (t) => {

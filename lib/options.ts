@@ -7,9 +7,10 @@ export interface MillifyOptions {
    */
   precision: number;
   /**
-   * The type of decimal marker (e.g. period "."") or *null* to use locale default.
+   * The active browser or server location. A string with a BCP 47 language
+   * tag, or an array of such strings, e.g. "en-US".
    */
-  decimalSeparator: string | null;
+  locales?: string | string[];
   /**
    * Convert units to lower case.
    */
@@ -28,7 +29,6 @@ export interface MillifyOptions {
  * Default options for Millify.
  */
 export const defaultOptions: MillifyOptions = {
-  decimalSeparator: null,
   lowercase: false,
   precision: 1,
   space: false,
