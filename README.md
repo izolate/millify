@@ -68,4 +68,5 @@ Name | Type | Default | Description
 `locales` | `string \| Array<string>` | browser language | Formats the number in different languages
 `lowercase` | `boolean` | `false` | Use lowercase abbreviations
 `space` | `boolean` | `false` | Add a space between number and abbreviation
+`unsafeInteger` | `boolean` | `false` | Use unsafe numbers 
 `units` | `Array<string>` | `['', 'K', 'M', 'B', 'T', 'P', 'E']` | Unit abbreviations
