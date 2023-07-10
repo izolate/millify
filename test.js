@@ -12,6 +12,35 @@ test("uses correct suffixes with default options", (t) => {
     [1000000, "1M"],
     [1000000000, "1B"],
     [1000000000000, "1T"],
+    [1000000000000000, "1P"],
+  ]);
+
+  for (const [value, expected] of tests.entries()) {
+    t.is(millify(value), expected);
+  }
+});
+
+test("uses correct suffixes with 'unsafeInteger' option", (t) => {
+  const tests = new Map([
+    [1000000000000000000, "1E"],
+    [1000000000000000000000, "1Z"],
+    [1000000000000000000000000, "1Y"],
+    [1000000000000000000000000000, "1R"],
+    [1700000000000000000000000000000, "1.7Q"],
+  ]);
+
+  for (const [value, expected] of tests.entries()) {
+    t.is(millify(value, { unsafeInteger: true }), expected);
+  }
+});
+
+test("uses correct suffixes without 'unsafeInteger' option", (t) => {
+  const tests = new Map([
+    ["1000000000000000000", "1000000000000000000"],
+    ["1000000000000000000000", "1000000000000000000000"],
+    ["1000000000000000000000000", "1000000000000000000000000"],
+    ["1000000000000000000000000000", "1000000000000000000000000000"],
+    ["1000000000000000000000000000000", "1000000000000000000000000000000"],
   ]);
 
   for (const [value, expected] of tests.entries()) {

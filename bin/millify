@@ -35,6 +35,12 @@ require("yargs").command(
         type: "boolean",
         default: false,
       })
+      .option("unsafeInteger", {
+        describe: "Use unsafe integer",
+        alias: "U",
+        type: "boolean",
+        default: false,
+      })
       .option("units", {
         describe: "Unit abbreviatons",
         alias: "u",
