@@ -23,6 +23,10 @@ export interface MillifyOptions {
    * A list of units to use.
    */
   units: string[];
+  /**
+   * Use unsafe integer
+   * */
+  unsafeInteger: boolean;
 }
 
 /**
@@ -32,6 +36,7 @@ export const defaultOptions: MillifyOptions = {
   lowercase: false,
   precision: 1,
   space: false,
+  unsafeInteger: false,
   units: [
     "",
     "K", // Thousand
@@ -40,5 +45,9 @@ export const defaultOptions: MillifyOptions = {
     "T", // Trillion
     "P", // Quadrillion
     "E", // Quintillion
+    "Z", // Sextillion
+    "Y", // Septillion
+    "R", // Octillion
+    "Q", // Nonillion
   ],
 };

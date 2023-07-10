@@ -48,7 +48,7 @@ function millify(value: number, options?: Partial<MillifyOptions>): string {
   // Originally this threw an error, but was changed to return a graceful fallback.
   let val: number;
   try {
-    val = parseValue(value);
+    val = parseValue(value, opts);
   } catch (e) {
     if (e instanceof Error) {
       console.warn(`WARN: ${e.message} (millify)`);

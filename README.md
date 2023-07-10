@@ -9,6 +9,7 @@ Before :unamused: | After :tada:
 `42500` | `'42.5 kg'`
 `1250000` | `'1.25 MB'`
 `2700000000` | `'2.7 bil'`
+`1500000000000000000000000000000` | `'1.5 Q'`
 
 
 ## Install
@@ -67,4 +68,5 @@ Name | Type | Default | Description
 `locales` | `string \| Array<string>` | browser language | Formats the number in different languages
 `lowercase` | `boolean` | `false` | Use lowercase abbreviations
 `space` | `boolean` | `false` | Add a space between number and abbreviation
+`unsafeInteger` | `boolean` | `false` | Use unsafe numbers 
 `units` | `Array<string>` | `['', 'K', 'M', 'B', 'T', 'P', 'E']` | Unit abbreviations

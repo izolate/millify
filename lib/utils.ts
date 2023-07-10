@@ -1,13 +1,27 @@
+import { MillifyOptions } from "./options";
+
 /**
  * parseValue ensures the value is a number and within accepted range.
  */
-export function parseValue(value: number): number {
+export function parseValue(
+  value: number,
+  options?: Partial<MillifyOptions>,
+): number {
   const val: number = parseFloat(value?.toString());
 
   if (isNaN(val)) {
     throw new Error(`Input value is not a number`);
   }
-  if (val > Number.MAX_SAFE_INTEGER || val < Number.MIN_SAFE_INTEGER) {
+  if (
+    options?.unsafeInteger &&
+    (val > Number.MAX_VALUE || val < Number.MIN_VALUE)
+  ) {
+    throw new RangeError("Input value is outside of unsafe integer range");
+  }
+  if (
+    !options?.unsafeInteger &&
+    (val > Number.MAX_SAFE_INTEGER || val < Number.MIN_SAFE_INTEGER)
+  ) {
     throw new RangeError("Input value is outside of safe integer range");
   }
   return val;
